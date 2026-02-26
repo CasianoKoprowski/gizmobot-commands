@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +24,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.15), transparent 25%);
             color: var(--text-primary);
@@ -49,6 +50,7 @@
             background: linear-gradient(to right, #60a5fa, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -1px;
             animation: fadeInDown 0.8s ease-out;
         }
@@ -77,6 +79,7 @@
             padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             animation: slideUp 0.8s ease-out;
+            overflow-x: auto;
         }
 
         .section-title {
@@ -89,57 +92,60 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Command Cards Grid */
-        .commands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            text-align: left;
         }
 
-        .cmd-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        th,
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .cmd-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
-            background: rgba(51, 65, 85, 0.8);
+        th {
+            background-color: rgba(51, 65, 85, 0.4);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tr:hover {
+            background-color: rgba(51, 65, 85, 0.3);
+        }
+
+        td {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            vertical-align: middle;
         }
 
         .cmd-trigger {
             display: inline-block;
             background: var(--trigger-bg);
             color: var(--trigger-text);
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.6rem;
             border-radius: 6px;
             font-family: monospace;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 1rem;
             border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .cmd-response {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0;
+            white-space: nowrap;
         }
 
         .badges {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
             display: flex;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .badge {
@@ -149,10 +155,26 @@
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .badge-mod { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-        .badge-global { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-none {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .badge-mod {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-global {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
 
         footer {
             margin-top: auto;
@@ -164,26 +186,52 @@
 
         /* Animations */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            .commands-container { padding: 1.5rem; }
-            .commands-grid { grid-template-columns: 1fr; }
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .commands-container {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -193,99 +241,127 @@
 
     <main>
         <div class="commands-container">
-            
-            <h2 class="section-title">✨ Static Commands</h2>
-            <div class="commands-grid">
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!lurk</span>
-                    <p class="cmd-response">Let everyone know you're stepping away.</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!unlurk</span>
-                    <p class="cmd-response">Announce your return from lurking.</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!time</span>
-                    <p class="cmd-response">Shows the bot's current local time.</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!song</span>
-                    <p class="cmd-response">Retrieves the currently playing song from Spotify.</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!clip</span>
-                    <p class="cmd-response">Takes a Twitch clip automatically.</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!so @user</span>
-                    <p class="cmd-response">Give a shoutout to another streamer (Mod/VIP).</p>
-                </div>
-                
-                <div class="cmd-card">
-                    <span class="cmd-trigger">!dog</span>
-                    <p class="cmd-response">Learn a bit about the real Gizmo!</p>
-                </div>
-                
-            </div>
 
-            <h2 class="section-title" style="margin-top: 2rem;">⚡ Dynamic Commands</h2>
-            <div class="commands-grid">
-                
-                <div class="cmd-card">
+            <h2 class="section-title">✨ Chat Commands</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Command</th>
+                        <th style="width: 20%;">Permissions / Scope</th>
+                        <th style="width: 60%;">Response / Description</th>
+                    </tr>
+                </thead>
+                <tbody>
                     
-                    <span class="cmd-trigger">!badges</span>
-                    <p class="cmd-response">Sub badges by @juunuki https://linktr.ee/juunuki</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!lurk</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Let everyone know you're stepping away.</td>
+                </tr>
                 
-                <div class="cmd-card">
+                <tr>
+                    <td><span class="cmd-trigger">!unlurk</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Announce your return from lurking.</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!time</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Shows the bot's current local time.</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!song</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Retrieves the currently playing song from Spotify.</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!clip</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Takes a Twitch clip automatically.</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!so @user</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Give a shoutout to another streamer (Mod/VIP).</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!dog</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Learn a bit about the real Gizmo!</td>
+                </tr>
+                
                     
-                    <span class="cmd-trigger">!clop</span>
-                    <p class="cmd-response">*neigh*</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!badges</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Sub badges by @juunuki https://linktr.ee/juunuki</td>
+                </tr>
                 
-                <div class="cmd-card">
-                    
-                    <span class="cmd-trigger">!discord</span>
-                    <p class="cmd-response">Join the Discord! https://discord.gg/cG6htWTBW8</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!clop</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>*neigh*</td>
+                </tr>
                 
-                <div class="cmd-card">
-                    
-                    <span class="cmd-trigger">!emotes</span>
-                    <p class="cmd-response">Emotes by @/weird_dog_thing (Toski) https://linktr.ee/weirddogthing penthilHeart</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!discord</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Join the Discord! https://discord.gg/cG6htWTBW8</td>
+                </tr>
                 
-                <div class="cmd-card">
-                    
-                    <span class="cmd-trigger">!joincult</span>
-                    <p class="cmd-response">Want to join the Cult? Hover over the stream video to find the red Extension Overlay icon! Click it to enter the Follower Raffle and customize your character if you win. Keep an eye out during runs to vote on whether to HELP or HINDER me! (Mobile viewers: Tap the screen to see the icon).</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!emotes</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Emotes by @/weird_dog_thing (Toski) https://linktr.ee/weirddogthing penthilHeart</td>
+                </tr>
                 
-                <div class="cmd-card">
-                    
-                    <span class="cmd-trigger">!youtube</span>
-                    <p class="cmd-response">Watch stream VODs on YouTube! https://youtube.com/@penthilus_?si=_W4gRMPwDdDHCRkp</p>
-                </div>
+                <tr>
+                    <td><span class="cmd-trigger">!joincult</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Want to join the Cult? Hover over the stream video to find the red Extension Overlay icon! Click it to enter the Follower Raffle and customize your character if you win. Keep an eye out during runs to vote on whether to HELP or HINDER me! (Mobile viewers: Tap the screen to see the icon).</td>
+                </tr>
                 
-            </div>
+                <tr>
+                    <td><span class="cmd-trigger">!test</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>test</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="cmd-trigger">!youtube</span></td>
+                    <td><span class="badge-none">--</span></td>
+                    <td>Watch stream VODs on YouTube! https://youtube.com/@penthilus_?si=_W4gRMPwDdDHCRkp</td>
+                </tr>
+                
+                </tbody>
+            </table>
 
             <h2 class="section-title" style="margin-top: 2rem;">🔢 Counters</h2>
-            <div class="commands-grid">
-                
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Command</th>
+                        <th style="width: 20%;">Permissions</th>
+                        <th style="width: 60%;">Current Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
 
         </div>
     </main>
 
     <footer>
-        Last updated automatically by GizmoBot • <span id="timestamp">February 25, 2026 at 09:10 PM</span>
+        Last updated automatically by GizmoBot • <span id="timestamp">February 25, 2026 at 09:24 PM</span>
     </footer>
 
 </body>
+
 </html>
